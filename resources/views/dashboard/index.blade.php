@@ -1186,14 +1186,10 @@
 
                 <div class="menu-divider"></div>
 
-                <a href="{{ route('logout') }}" class="menu-item"
-                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                <a href="{{ route('logout.confirm') }}" class="menu-item">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Logout</span>
                 </a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                    @csrf
-                </form>
             </div>
         </div>
 
@@ -1224,8 +1220,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item text-danger" href="{{ route('logout.confirm') }}">
                                             <i class="fas fa-sign-out-alt me-2"></i>Logout
                                         </a>
                                     </li>
@@ -1714,11 +1709,14 @@
         });
 
         // Logout confirmation
-        document.querySelectorAll('a[href*="logout"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (!confirm('Anda yakin ingin logout?')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hanya handle logout link yang langsung POST
+            const directLogoutLinks = document.querySelectorAll('a[href="{{ route('logout') }}"]');
+            directLogoutLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                }
+                    window.location.href = "{{ route('logout.confirm') }}";
+                });
             });
         });
     </script>

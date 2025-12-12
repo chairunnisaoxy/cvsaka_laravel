@@ -558,7 +558,7 @@
             .main-content {
                 padding: 1.5rem;
             }
-            
+
             .pagination-wrapper {
                 flex-direction: column;
                 gap: 1rem;
@@ -592,12 +592,12 @@
                 height: 35px;
                 font-size: 0.9rem;
             }
-            
+
             .pagination {
                 flex-wrap: wrap;
                 justify-content: center;
             }
-            
+
             .page-link {
                 min-width: 35px;
                 height: 35px;
@@ -630,7 +630,7 @@
             .modal-dialog {
                 margin: 0.5rem;
             }
-            
+
             .pagination-info {
                 font-size: 0.8rem;
             }
@@ -662,7 +662,8 @@
             </div>
 
             <div class="sidebar-menu">
-                <a href="{{ route('dashboard') }}" class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+                <a href="{{ route('dashboard') }}"
+                    class="menu-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Dashboard</span>
                 </a>
@@ -679,14 +680,16 @@
 
                 @if (auth('karyawan')->user()->jabatan == 'supervisor' ||
                         (auth('karyawan')->user()->jabatan == 'pemilik' && auth('karyawan')->user()->email != 'pemilik@gmail.com'))
-                    <a href="{{ route('absensi.index') }}" class="menu-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
+                    <a href="{{ route('absensi.index') }}"
+                        class="menu-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
                         <i class="fas fa-calendar-check"></i>
                         <span>Absensi</span>
                     </a>
                 @endif
 
                 @if (in_array(auth('karyawan')->user()->jabatan, ['pemilik', 'supervisor']))
-                    <a href="{{ route('produk.index') }}" class="menu-item {{ request()->routeIs('produk*') ? 'active' : '' }}">
+                    <a href="{{ route('produk.index') }}"
+                        class="menu-item {{ request()->routeIs('produk*') ? 'active' : '' }}">
                         <i class="fas fa-cube"></i>
                         <span>Produk</span>
                     </a>
@@ -708,9 +711,10 @@
         </div>
 
         <!-- Logout Form -->
-        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-            @csrf
-        </form>
+        <a href="{{ route('logout.confirm') }}" class="menu-item">
+            <i class="fas fa-sign-out-alt"></i>
+            <span>Logout</span>
+        </a>
 
         <!-- Main Content Wrapper -->
         <div class="main-content-wrapper">
@@ -829,19 +833,23 @@
                                                 <td><strong>{{ $a->id_absensi }}</strong></td>
                                                 <td>{{ \Carbon\Carbon::parse($a->tanggal)->format('d/m/Y') }}</td>
                                                 <td>07:00</td>
-                                                <td>{{ $a->jam_keluar ? \Carbon\Carbon::parse($a->jam_keluar)->format('H:i') : '-' }}</td>
+                                                <td>{{ $a->jam_keluar ? \Carbon\Carbon::parse($a->jam_keluar)->format('H:i') : '-' }}
+                                                </td>
                                                 <td>
                                                     <div class="btn-group" role="group">
                                                         <a href="{{ route('absensi.karyawan', $a->id_absensi) }}"
-                                                            class="btn btn-info btn-sm btn-action" title="Detail Karyawan">
+                                                            class="btn btn-info btn-sm btn-action"
+                                                            title="Detail Karyawan">
                                                             <i class="fas fa-users"></i>
                                                         </a>
-                                                        <button type="button" class="btn btn-warning btn-sm btn-action edit-btn"
+                                                        <button type="button"
+                                                            class="btn btn-warning btn-sm btn-action edit-btn"
                                                             data-id="{{ $a->id_absensi }}" title="Edit">
                                                             <i class="fas fa-edit"></i>
                                                         </button>
-                                                        <button type="button" class="btn btn-danger btn-sm btn-action hapus-btn"
-                                                            data-id="{{ $a->id_absensi }}" 
+                                                        <button type="button"
+                                                            class="btn btn-danger btn-sm btn-action hapus-btn"
+                                                            data-id="{{ $a->id_absensi }}"
                                                             data-tanggal="{{ \Carbon\Carbon::parse($a->tanggal)->format('d/m/Y') }}"
                                                             title="Hapus">
                                                             <i class="fas fa-trash"></i>
@@ -857,10 +865,11 @@
                                                     <i class="fas fa-calendar-times fa-3x text-muted mb-3"></i>
                                                     <p class="text-muted">Tidak ada data absensi</p>
                                                     @if (request('search'))
-                                                        <a href="{{ route('absensi.index') }}" class="btn btn-primary">Tampilkan Semua</a>
+                                                        <a href="{{ route('absensi.index') }}"
+                                                            class="btn btn-primary">Tampilkan Semua</a>
                                                     @else
-                                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                                            data-bs-target="#tambahModal">
+                                                        <button type="button" class="btn btn-primary"
+                                                            data-bs-toggle="modal" data-bs-target="#tambahModal">
                                                             Tambah Absensi Pertama
                                                         </button>
                                                     @endif
@@ -871,12 +880,14 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <!-- PAGINATION FIXED -->
                         @if ($absensi->hasPages())
                             <div class="pagination-wrapper">
                                 <div class="pagination-info">
-                                    Menampilkan <strong>{{ $absensi->firstItem() ?: 0 }}</strong> - <strong>{{ $absensi->lastItem() ?: 0 }}</strong> dari <strong>{{ $absensi->total() }}</strong> data
+                                    Menampilkan <strong>{{ $absensi->firstItem() ?: 0 }}</strong> -
+                                    <strong>{{ $absensi->lastItem() ?: 0 }}</strong> dari
+                                    <strong>{{ $absensi->total() }}</strong> data
                                 </div>
                                 <nav>
                                     <ul class="pagination">
@@ -923,7 +934,8 @@
                                                 </li>
                                             @else
                                                 <li class="page-item">
-                                                    <a class="page-link" href="{{ $absensi->url($i) }}">{{ $i }}</a>
+                                                    <a class="page-link"
+                                                        href="{{ $absensi->url($i) }}">{{ $i }}</a>
                                                 </li>
                                             @endif
                                         @endfor
@@ -936,7 +948,8 @@
                                                 </li>
                                             @endif
                                             <li class="page-item">
-                                                <a class="page-link" href="{{ $absensi->url($lastPage) }}">{{ $lastPage }}</a>
+                                                <a class="page-link"
+                                                    href="{{ $absensi->url($lastPage) }}">{{ $lastPage }}</a>
                                             </li>
                                         @endif
 
@@ -984,13 +997,15 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-6 mb-3">
-                                <label for="id_absensi" class="form-label">ID Absensi <span class="text-danger">*</span></label>
-                                <input type="text" class="form-control" id="id_absensi" name="id_absensi" required
-                                    pattern="[A-Za-z0-9]+" title="Hanya huruf dan angka diperbolehkan">
+                                <label for="id_absensi" class="form-label">ID Absensi <span
+                                        class="text-danger">*</span></label>
+                                <input type="text" class="form-control" id="id_absensi" name="id_absensi"
+                                    required pattern="[A-Za-z0-9]+" title="Hanya huruf dan angka diperbolehkan">
                                 <small class="text-muted">Contoh: ABS001, ABS002, dll.</small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="tanggal" class="form-label">Tanggal <span class="text-danger">*</span></label>
+                                <label for="tanggal" class="form-label">Tanggal <span
+                                        class="text-danger">*</span></label>
                                 <input type="date" class="form-control" id="tanggal" name="tanggal" required>
                             </div>
                         </div>
@@ -1002,7 +1017,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="jam_keluar" class="form-label">Jam Keluar</label>
-                                <input type="time" class="form-control" id="jam_keluar" name="jam_keluar" step="60">
+                                <input type="time" class="form-control" id="jam_keluar" name="jam_keluar"
+                                    step="60">
                                 <small class="text-muted">Waktu operator pulang</small>
                             </div>
                         </div>
@@ -1040,8 +1056,10 @@
                                 <small class="text-muted">ID Absensi tidak dapat diubah</small>
                             </div>
                             <div class="col-md-6 mb-3">
-                                <label for="edit_tanggal" class="form-label">Tanggal <span class="text-danger">*</span></label>
-                                <input type="date" class="form-control" id="edit_tanggal" name="tanggal" required>
+                                <label for="edit_tanggal" class="form-label">Tanggal <span
+                                        class="text-danger">*</span></label>
+                                <input type="date" class="form-control" id="edit_tanggal" name="tanggal"
+                                    required>
                             </div>
                         </div>
                         <div class="row">
@@ -1052,7 +1070,8 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="edit_jam_keluar" class="form-label">Jam Keluar</label>
-                                <input type="time" class="form-control" id="edit_jam_keluar" name="jam_keluar" step="60">
+                                <input type="time" class="form-control" id="edit_jam_keluar" name="jam_keluar"
+                                    step="60">
                                 <small class="text-muted">Waktu operator pulang</small>
                             </div>
                         </div>
@@ -1129,7 +1148,7 @@
         // Form Tambah Absensi
         document.getElementById('formTambah').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Validasi jam keluar
             const jamKeluar = document.getElementById('jam_keluar').value;
             if (jamKeluar && jamKeluar <= '07:00') {
@@ -1177,7 +1196,7 @@
         // Form Edit Absensi
         document.getElementById('formEdit').addEventListener('submit', function(e) {
             e.preventDefault();
-            
+
             // Validasi jam keluar
             const jamKeluar = document.getElementById('edit_jam_keluar').value;
             if (jamKeluar && jamKeluar <= '07:00') {
@@ -1238,9 +1257,11 @@
                             document.getElementById('edit_id_absensi').value = absensi.id_absensi;
                             document.getElementById('edit_id_display').value = absensi.id_absensi;
                             document.getElementById('edit_tanggal').value = absensi.tanggal;
-                            document.getElementById('edit_jam_keluar').value = absensi.jam_keluar ? absensi.jam_keluar.substring(0, 5) : '';
+                            document.getElementById('edit_jam_keluar').value = absensi.jam_keluar ?
+                                absensi.jam_keluar.substring(0, 5) : '';
 
-                            document.getElementById('formEdit').action = `/absensi/${absensi.id_absensi}`;
+                            document.getElementById('formEdit').action =
+                                `/absensi/${absensi.id_absensi}`;
                             new bootstrap.Modal(document.getElementById('editModal')).show();
                         } else {
                             showAlert(data.message, 'danger');
@@ -1326,11 +1347,14 @@
         }
 
         // Logout confirmation
-        document.querySelectorAll('a[href*="logout"]').forEach(link => {
-            link.addEventListener('click', function(e) {
-                if (!confirm('Anda yakin ingin logout?')) {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hanya handle logout link yang langsung POST
+            const directLogoutLinks = document.querySelectorAll('a[href="{{ route('logout') }}"]');
+            directLogoutLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
                     e.preventDefault();
-                }
+                    window.location.href = "{{ route('logout.confirm') }}";
+                });
             });
         });
     </script>

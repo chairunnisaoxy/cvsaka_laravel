@@ -82,12 +82,82 @@ class AuthController extends Controller
         ])->withInput();
     }
 
+    /**
+     * Show logout confirmation page
+     */
+    public function showLogoutConfirm(Request $request)
+    {
+        // Validasi apakah user sudah login
+        if (!Auth::guard('karyawan')->check()) {
+            return redirect()->route('login')->with('error', 'Silakan login terlebih dahulu');
+        }
+
+        return view('auth.logout', [
+            'karyawan' => Auth::guard('karyawan')->user()
+        ]);
+    }
+
+    /**
+     * Handle logout - PERBAIKAN DI SINI
+     */
     public function logout(Request $request)
     {
-        Auth::guard('karyawan')->logout();
+        if (Auth::guard('karyawan')->check()) {
+            $nama_karyawan = Auth::guard('karyawan')->user()->nama_karyawan;
+
+            // Cara 1: Manual logout untuk guard custom
+            $request->session()->forget('karyawan_id');
+            $request->session()->forget('authenticated');
+
+            // Cara 2: Invalidate session sepenuhnya
+            Auth::guard('karyawan')->logout(); // Ini seharusnya berhasil jika guard dikonfigurasi dengan benar
+
+            // Cara 3: Clear session data
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+
+            return redirect()->route('login')
+                ->with('success', "Logout berhasil! Sampai jumpa, $nama_karyawan");
+        }
+
+        return redirect()->route('login');
+    }
+
+    /**
+     * Alternative logout method jika yang di atas masih error
+     */
+    public function logoutAlternative(Request $request)
+    {
+        $nama_karyawan = '';
+
+        // Simpan nama karyawan sebelum logout
+        if (Auth::guard('karyawan')->check()) {
+            $nama_karyawan = Auth::guard('karyawan')->user()->nama_karyawan;
+        }
+
+        // Clear semua session data karyawan
+        $request->session()->forget([
+            'karyawan_id',
+            'karyawan_nama',
+            'karyawan_jabatan',
+            'authenticated',
+            'bypass'
+        ]);
+
+        // Invalidate session
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('landing')->with('success', 'Anda telah logout.');
+        // Clear cookie jika ada
+        if (isset($_COOKIE[session_name()])) {
+            setcookie(session_name(), '', time() - 3600, '/');
+        }
+
+        if (!empty($nama_karyawan)) {
+            return redirect()->route('login')
+                ->with('success', "Logout berhasil! Sampai jumpa, $nama_karyawan");
+        }
+
+        return redirect()->route('login');
     }
 }

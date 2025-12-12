@@ -38,14 +38,16 @@
         <!-- Menu Absensi: Hanya untuk supervisor dan bukan pemilik@gmail.com -->
         @if (auth('karyawan')->user()->jabatan == 'supervisor' ||
                 (auth('karyawan')->user()->jabatan == 'pemilik' && auth('karyawan')->user()->email != 'pemilik@gmail.com'))
-            <a href="{{ route('absensi.index') }}" class="menu-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
+            <a href="{{ route('absensi.index') }}"
+                class="menu-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-check"></i>
                 <span>Absensi</span>
             </a>
         @endif
 
         @if (in_array(auth('karyawan')->user()->jabatan, ['pemilik', 'supervisor']))
-            <a href="{{ route('produk.index') }}" class="menu-item {{ request()->routeIs('produk*') ? 'active' : '' }}">
+            <a href="{{ route('produk.index') }}"
+                class="menu-item {{ request()->routeIs('produk*') ? 'active' : '' }}">
                 <i class="fas fa-cube"></i>
                 <span>Produk</span>
             </a>
@@ -58,18 +60,17 @@
 
         <div class="menu-divider"></div>
 
-        <a href="{{ route('logout') }}" class="menu-item"
-            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <a href="{{ route('logout.confirm') }}" class="menu-item">
             <i class="fas fa-sign-out-alt"></i>
             <span>Logout</span>
         </a>
     </div>
 </div>
 
-<!-- Logout Form -->
+{{-- <!-- Logout Form -->
 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
     @csrf
-</form>
+</form> --}}
 
 <style>
     :root {

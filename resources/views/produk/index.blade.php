@@ -941,5 +941,17 @@
         document.getElementById('editModal').addEventListener('hidden.bs.modal', function() {
             document.getElementById('formEdit').reset();
         });
+
+        // Logout confirmation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Hanya handle logout link yang langsung POST
+            const directLogoutLinks = document.querySelectorAll('a[href="{{ route('logout') }}"]');
+            directLogoutLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = "{{ route('logout.confirm') }}";
+                });
+            });
+        });
     </script>
 @endpush

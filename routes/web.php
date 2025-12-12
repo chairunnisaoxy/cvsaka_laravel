@@ -361,13 +361,14 @@ Route::middleware('guest:karyawan')->group(function () {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-// Protected Routes - hanya untuk pemilik/supervisor
 Route::middleware(['auth:karyawan'])->group(function () {
     // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    
+
+    // Logout routes dengan konfirmasi
+    Route::get('/logout-confirm', [AuthController::class, 'showLogoutConfirm'])->name('logout.confirm');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
     // Produk routes menggunakan resource (semua method otomatis)
     Route::resource('produk', ProdukController::class);
 
@@ -391,7 +392,7 @@ Route::get('/karyawan/{karyawan}/calculate-total-hadir', [KaryawanController::cl
 Route::prefix('karyawan/{karyawan}')->group(function () {
     // Halaman produk
     Route::get('/produk', [KaryawanController::class, 'produk'])->name('karyawan.produk');
-    
+
     // AJAX routes untuk produk
     Route::get('/produk/{produk}', [KaryawanController::class, 'getProdukKaryawan'])->name('karyawan.get-produk');
     Route::post('/produk', [KaryawanController::class, 'storeProduk'])->name('karyawan.store-produk');
@@ -423,12 +424,12 @@ Route::prefix('produk-karyawan')->group(function () {
 Route::middleware(['auth:karyawan'])->group(function () {
     // Absensi resource routes
     Route::resource('absensi', AbsensiController::class);
-    
+
     // Absensi Karyawan Detail Routes
     Route::prefix('absensi')->name('absensi.')->group(function () {
         // Detail karyawan dalam absensi
         Route::get('/{absensi}/karyawan', [AbsensiKaryawanController::class, 'karyawan'])->name('karyawan');
-        
+
         // AJAX routes
         Route::get('/karyawan/get-data', [AbsensiKaryawanController::class, 'getData'])->name('karyawan.get-data');
         Route::post('/karyawan/store', [AbsensiKaryawanController::class, 'store'])->name('karyawan.store');

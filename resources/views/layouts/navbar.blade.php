@@ -18,12 +18,10 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li>
-                    <form action="{{ route('logout') }}" method="POST">
-                        @csrf
-                        <button type="submit" class="dropdown-item text-danger">
-                            <i class="fas fa-sign-out-alt me-2"></i>Logout
-                        </button>
-                    </form>
+                    <a href="{{ route('logout.confirm') }}" class="menu-item">
+                        <i class="fas fa-sign-out-alt"></i>
+                        <span>Logout</span>
+                    </a>
                 </li>
             </ul>
         </div>
