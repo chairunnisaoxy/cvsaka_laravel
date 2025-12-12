@@ -1166,7 +1166,7 @@
                 @endif
 
                 @if ($jabatan == 'supervisor')
-                    <a href="#" class="menu-item">
+                    <a href="{{ route('absensi.index') }}" class="menu-item">
                         <i class="fas fa-calendar-check"></i>
                         <span>Absensi</span>
                     </a>
