@@ -1179,10 +1179,12 @@
                     </a>
                 @endif
 
-                <a href="#" class="menu-item">
-                    <i class="fas fa-file-invoice-dollar"></i>
-                    <span>Laporan Penggajian</span>
-                </a>
+                @if (in_array($jabatan, ['pemilik', 'supervisor']))
+                    <a href="{{ route('laporan.index') }}" class="menu-item">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                        <span>Laporan Penggajian</span>
+                    </a>
+                @endif
 
                 <div class="menu-divider"></div>
 

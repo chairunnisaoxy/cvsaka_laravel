@@ -9,6 +9,7 @@ use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KaryawanProdukController;
 use App\Http\Controllers\AbsensiController;
 use App\Http\Controllers\AbsensiKaryawanController;
+use App\Http\Controllers\LaporanController;
 
 
 Route::middleware(['auth.karyawan'])->group(function () {
@@ -436,4 +437,11 @@ Route::middleware(['auth:karyawan'])->group(function () {
         Route::post('/karyawan/update', [AbsensiKaryawanController::class, 'update'])->name('karyawan.update');
         Route::post('/karyawan/destroy', [AbsensiKaryawanController::class, 'destroy'])->name('karyawan.destroy');
     });
+});
+
+// Laporan Penggajian Routes
+Route::middleware(['auth:karyawan'])->group(function () {
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+    Route::get('/laporan/cetak-detail/{id}', [LaporanController::class, 'cetakDetail'])->name('laporan.cetak-detail');
+    Route::get('/laporan/cetak-semua', [LaporanController::class, 'cetakSemua'])->name('laporan.cetak-semua');
 });

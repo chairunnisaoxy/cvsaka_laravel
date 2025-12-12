@@ -53,7 +53,8 @@
             </a>
         @endif
 
-        <a href="#" class="menu-item {{ request()->is('laporan*') ? 'active' : '' }}">
+        <a href="{{ route('laporan.index') }}"
+            class="menu-item {{ request()->routeIs('laporan.*') ? 'active' : '' }}">
             <i class="fas fa-file-invoice-dollar"></i>
             <span>Laporan Penggajian</span>
         </a>
