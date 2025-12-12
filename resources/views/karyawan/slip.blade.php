@@ -732,7 +732,6 @@
     <!-- Action Buttons -->
     <div class="action-buttons">
         <button class="btn-print" onclick="optimizedPrint()">🖨️ Cetak Slip Gaji</button>
-        <button class="btn-close" onclick="window.close()">✕ Tutup</button>
     </div>
     </div>
 
