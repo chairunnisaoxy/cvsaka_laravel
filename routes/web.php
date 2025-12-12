@@ -7,6 +7,8 @@ use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProdukController;
 use App\Http\Controllers\KaryawanProdukController;
+use App\Http\Controllers\AbsensiController;
+use App\Http\Controllers\AbsensiKaryawanController;
 
 
 Route::middleware(['auth.karyawan'])->group(function () {
@@ -346,41 +348,6 @@ Route::get('/quick-setup', function () {
     echo "<br><a href='/simple-fix'>⇨ Kembali ke Simple Fix</a>";
 });
 
-// // ==============================================
-// // TEST ROUTES (Sederhana)
-// // ==============================================
-
-// Route::get('/test-connection', function () {
-//     echo "<h3>🧪 TEST CONNECTION</h3>";
-
-//     try {
-//         $mysqli = new mysqli(
-//             env('DB_HOST', '127.0.0.1'),
-//             env('DB_USERNAME', 'root'),
-//             env('DB_PASSWORD', ''),
-//             env('DB_DATABASE', 'newcvsakapratama'),
-//             env('DB_PORT', '3306')
-//         );
-
-//         if ($mysqli->connect_error) {
-//             echo "❌ MySQL Error: " . $mysqli->connect_error;
-//         } else {
-//             echo "✅ MySQL Connected<br>";
-
-//             // Test query
-//             $result = $mysqli->query("SELECT COUNT(*) as count FROM m_karyawan");
-//             if ($result) {
-//                 $row = $result->fetch_assoc();
-//                 echo "✅ Data Karyawan: " . $row['count'] . " records<br>";
-//             }
-
-//             $mysqli->close();
-//         }
-//     } catch (Exception $e) {
-//         echo "❌ Exception: " . $e->getMessage();
-//     }
-// });
-
 // ==============================================
 // MAIN APPLICATION ROUTES (Tetap sama)
 // ==============================================
@@ -447,4 +414,25 @@ Route::prefix('produk-karyawan')->group(function () {
     Route::post('/update', [KaryawanProdukController::class, 'update'])->name('produk-karyawan.update');
     Route::post('/destroy', [KaryawanProdukController::class, 'destroy'])->name('produk-karyawan.destroy');
     Route::get('/get-data', [KaryawanProdukController::class, 'getProdukKaryawan'])->name('produk-karyawan.get-data');
+});
+
+// ==============================================
+// ABSENSI ROUTES (TAMBAHAN BARU DI BAWAH INI)
+// ==============================================
+
+Route::middleware(['auth:karyawan'])->group(function () {
+    // Absensi resource routes
+    Route::resource('absensi', AbsensiController::class);
+    
+    // Absensi Karyawan Detail Routes
+    Route::prefix('absensi')->name('absensi.')->group(function () {
+        // Detail karyawan dalam absensi
+        Route::get('/{absensi}/karyawan', [AbsensiKaryawanController::class, 'karyawan'])->name('karyawan');
+        
+        // AJAX routes
+        Route::get('/karyawan/get-data', [AbsensiKaryawanController::class, 'getData'])->name('karyawan.get-data');
+        Route::post('/karyawan/store', [AbsensiKaryawanController::class, 'store'])->name('karyawan.store');
+        Route::post('/karyawan/update', [AbsensiKaryawanController::class, 'update'])->name('karyawan.update');
+        Route::post('/karyawan/destroy', [AbsensiKaryawanController::class, 'destroy'])->name('karyawan.destroy');
+    });
 });

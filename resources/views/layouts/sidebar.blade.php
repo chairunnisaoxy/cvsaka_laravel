@@ -38,7 +38,7 @@
         <!-- Menu Absensi: Hanya untuk supervisor dan bukan pemilik@gmail.com -->
         @if (auth('karyawan')->user()->jabatan == 'supervisor' ||
                 (auth('karyawan')->user()->jabatan == 'pemilik' && auth('karyawan')->user()->email != 'pemilik@gmail.com'))
-            <a href="#" class="menu-item {{ request()->is('absensi*') ? 'active' : '' }}">
+            <a href="{{ route('absensi.index') }}" class="menu-item {{ request()->routeIs('absensi.*') ? 'active' : '' }}">
                 <i class="fas fa-calendar-check"></i>
                 <span>Absensi</span>
             </a>
