@@ -211,9 +211,9 @@
             width: 100%;
         }
 
-        /* Welcome Section */
+        /* Welcome Section - Sama dengan karyawan/index */
         .welcome-section {
-            background: linear-gradient(135deg, var(--primary) 0%, #1a2530 100%);
+            background: linear-gradient(135deg, #2c3e50 0%, #1a2530 100%);
             color: white;
             border-radius: 16px;
             padding: 2.5rem;
@@ -252,142 +252,119 @@
             color: rgba(255, 255, 255, 0.2);
         }
 
-        /* Action Bar */
+        /* Action Bar - Sama dengan karyawan/index */
         .action-bar {
             background: white;
             border-radius: 12px;
             padding: 1.5rem;
-            margin-bottom: 1.5rem;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
+            border: 1px solid #e9ecef;
+            margin-bottom: 1.5rem;
         }
 
         .search-box {
-            width: 300px;
+            max-width: 400px;
         }
 
-        @media (max-width: 768px) {
-            .action-bar {
-                flex-direction: column;
-                gap: 1rem;
-                align-items: stretch;
-            }
-
-            .search-box {
-                width: 100%;
-            }
+        .search-box .input-group {
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
         }
 
-        /* Table Styles */
+        .search-box .form-control {
+            border: 1px solid #e9ecef;
+            border-right: none;
+            padding: 0.75rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .search-box .btn {
+            border: 1px solid #e9ecef;
+            border-left: none;
+            padding: 0.75rem 1rem;
+        }
+
+        /* Card - Sama dengan karyawan/index */
         .card {
+            background: white;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-            border: 1px solid var(--border);
-            margin-bottom: 2rem;
+            border: 1px solid #e9ecef;
+            margin-bottom: 1.5rem;
             overflow: hidden;
         }
 
         .card-header {
-            background: white;
-            border-bottom: 1px solid var(--border);
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
             padding: 1.25rem 1.5rem;
+            border-bottom: none;
         }
 
         .card-header h5 {
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: var(--primary);
-            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
         }
 
-        .card-body {
-            padding: 0;
+        .card-header h5 i {
+            margin-right: 0.75rem;
+            font-size: 1.3rem;
         }
 
+        /* Table - Sama dengan karyawan/index */
         .table {
             margin: 0;
         }
 
-        .table thead th {
-            background-color: var(--light);
-            color: var(--primary);
+        .table th {
+            background-color: #2c3e50;
+            color: white;
             font-weight: 600;
-            border-bottom: 2px solid var(--border);
-            padding: 1rem 1.5rem;
-            white-space: nowrap;
+            border: none;
+            padding: 1rem 0.75rem;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .table tbody td {
-            padding: 1rem 1.5rem;
+        .table td {
+            padding: 1rem 0.75rem;
             vertical-align: middle;
-            border-color: var(--border);
+            border-color: #e9ecef;
+        }
+
+        .table tbody tr {
+            transition: all 0.3s ease;
         }
 
         .table tbody tr:hover {
-            background-color: rgba(0, 0, 0, 0.02);
+            background-color: rgba(52, 152, 219, 0.05);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
-        .table-striped tbody tr:nth-of-type(odd) {
-            background-color: rgba(0, 0, 0, 0.01);
-        }
-
+        /* Button Action - Sama dengan karyawan/index */
         .btn-action {
-            width: 40px;
-            height: 40px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 8px;
-            margin: 0 2px;
-        }
-
-        .btn-group .btn-action {
-            margin: 0 1px;
-        }
-
-        /* Modal Styles */
-        .modal-content {
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .modal-header {
-            background: var(--light);
-            border-bottom: 1px solid var(--border);
-            padding: 1.25rem 1.5rem;
-        }
-
-        .modal-title {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .modal-footer {
-            border-top: 1px solid var(--border);
-            padding: 1.25rem 1.5rem;
-        }
-
-        /* Alert Styles */
-        #alertContainer {
-            margin-bottom: 1.5rem;
-        }
-
-        .alert {
-            border-radius: 10px;
+            padding: 0.4rem 0.6rem;
+            font-size: 0.8rem;
+            border-radius: 6px;
+            transition: all 0.3s ease;
             border: none;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
 
-        /* Empty State */
+        .btn-action:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Empty State - Sama dengan karyawan/index */
         .empty-state {
             text-align: center;
             padding: 3rem 1rem;
-            color: var(--gray);
+            color: #6c757d;
         }
 
         .empty-state i {
@@ -396,9 +373,90 @@
             opacity: 0.3;
         }
 
-        .empty-state p {
-            font-size: 1rem;
-            margin-bottom: 1.5rem;
+        /* Modal Header - Sama dengan karyawan/index */
+        .modal-header {
+            background: linear-gradient(135deg, #2c3e50, #34495e);
+            color: white;
+            border-bottom: none;
+        }
+
+        .modal-header .btn-close {
+            filter: invert(1);
+        }
+
+        /* PAGINATION STYLES - Sama dengan karyawan/index */
+        .pagination-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            background: white;
+            border-top: 1px solid #e9ecef;
+        }
+
+        .pagination-info {
+            font-size: 0.9rem;
+            color: #6c757d;
+        }
+
+        .pagination {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            gap: 0.25rem;
+        }
+
+        .page-item {
+            margin: 0;
+        }
+
+        .page-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 40px;
+            height: 40px;
+            padding: 0.5rem;
+            background: white;
+            border: 1px solid #e9ecef;
+            color: #2c3e50;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .page-link:hover:not(.disabled) {
+            background: #3498db;
+            color: white;
+            border-color: #3498db;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.2);
+        }
+
+        .page-item.active .page-link {
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border-color: #3498db;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        }
+
+        .page-item.disabled .page-link {
+            background: #f8f9fa;
+            color: #6c757d;
+            border-color: #e9ecef;
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+
+        .page-item.disabled .page-link:hover {
+            background: #f8f9fa;
+            color: #6c757d;
+            border-color: #e9ecef;
+            transform: none;
+            box-shadow: none;
         }
 
         /* Footer */
@@ -409,25 +467,6 @@
             text-align: center;
             color: var(--gray);
             font-size: 0.9rem;
-        }
-
-        /* Badge Styles */
-        .badge {
-            padding: 0.4rem 0.8rem;
-            font-weight: 600;
-            border-radius: 20px;
-        }
-
-        .badge-status {
-            padding: 0.4rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-
-        .badge-active {
-            background: linear-gradient(135deg, #198754, #157347);
-            color: white;
         }
 
         /* Mobile Sidebar Toggle */
@@ -454,81 +493,6 @@
         .mobile-sidebar-toggle:hover {
             background: var(--secondary);
             transform: scale(1.05);
-        }
-
-        /* PAGINATION FIXED STYLES */
-        .pagination-wrapper {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.25rem 1.5rem;
-            background: white;
-            border-top: 1px solid var(--border);
-        }
-
-        .pagination-info {
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            gap: 0.25rem;
-        }
-
-        .page-item {
-            margin: 0;
-        }
-
-        .page-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 40px;
-            height: 40px;
-            padding: 0.5rem;
-            background: white;
-            border: 1px solid var(--border);
-            color: var(--primary);
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: all 0.2s ease;
-        }
-
-        .page-link:hover:not(.disabled) {
-            background: var(--accent);
-            color: white;
-            border-color: var(--accent);
-            transform: translateY(-1px);
-            box-shadow: 0 2px 6px rgba(52, 152, 219, 0.2);
-        }
-
-        .page-item.active .page-link {
-            background: linear-gradient(135deg, var(--accent), #2980b9);
-            color: white;
-            border-color: var(--accent);
-            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
-        }
-
-        .page-item.disabled .page-link {
-            background: var(--light);
-            color: var(--gray);
-            border-color: var(--border);
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .page-item.disabled .page-link:hover {
-            background: var(--light);
-            color: var(--gray);
-            border-color: var(--border);
-            transform: none;
-            box-shadow: none;
         }
 
         /* Responsive Design */
@@ -564,6 +528,16 @@
                 gap: 1rem;
                 text-align: center;
             }
+
+            .action-bar {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .search-box {
+                max-width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -588,9 +562,8 @@
             }
 
             .btn-action {
-                width: 35px;
-                height: 35px;
-                font-size: 0.9rem;
+                padding: 0.3rem 0.5rem;
+                font-size: 0.75rem;
             }
 
             .pagination {
@@ -710,12 +683,6 @@
             </div>
         </div>
 
-        <!-- Logout Form -->
-        <a href="{{ route('logout.confirm') }}" class="menu-item">
-            <i class="fas fa-sign-out-alt"></i>
-            <span>Logout</span>
-        </a>
-
         <!-- Main Content Wrapper -->
         <div class="main-content-wrapper">
             <!-- Navigation -->
@@ -741,8 +708,7 @@
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
                                     <li>
-                                        <a class="dropdown-item text-danger" href="{{ route('logout') }}"
-                                            onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                        <a class="dropdown-item text-danger" href="{{ route('logout.confirm') }}">
                                             <i class="fas fa-sign-out-alt me-2"></i>Logout
                                         </a>
                                     </li>
@@ -836,11 +802,11 @@
                                                 <td>{{ $a->jam_keluar ? \Carbon\Carbon::parse($a->jam_keluar)->format('H:i') : '-' }}
                                                 </td>
                                                 <td>
-                                                    <div class="btn-group" role="group">
-                                                        <a href="{{ route('absensi.karyawan', $a->id_absensi) }}"
+                                                    <div class="btn-group" role="group"> <a
+                                                            href="{{ route('absensi.karyawan', $a->id_absensi) }}"
                                                             class="btn btn-info btn-sm btn-action"
                                                             title="Detail Karyawan">
-                                                            <i class="fas fa-users"></i>
+                                                            <i class="fas fa-list"></i>
                                                         </a>
                                                         <button type="button"
                                                             class="btn btn-warning btn-sm btn-action edit-btn"
@@ -881,7 +847,7 @@
                             </table>
                         </div>
 
-                        <!-- PAGINATION FIXED -->
+                        <!-- PAGINATION -->
                         @if ($absensi->hasPages())
                             <div class="pagination-wrapper">
                                 <div class="pagination-info">
